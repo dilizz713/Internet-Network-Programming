@@ -1,5 +1,6 @@
 package lk.ijse.gdse71.test01simplechatapplication;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -52,8 +54,8 @@ public class ServerController {
     public void initialize() {
         new Thread(() -> {
             try{
-                txtArea.setStyle("-fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 14;");
-                txtField.setStyle("-fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 14;");
+                txtArea.setStyle("-fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 14");
+                txtField.setStyle("-fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 14 ");
 
                 serverSocket = new ServerSocket(4000);
                 txtArea.appendText("Server Started\n");
@@ -74,6 +76,7 @@ public class ServerController {
                     }
 
                     txtArea.appendText("Client : " + message + "\n");
+
                 }
 
             }catch(Exception e){
@@ -119,7 +122,7 @@ public class ServerController {
 
     @FXML
     void sendEmojiBtnOnActions(ActionEvent event) {
-        String[] emojis = {"😊" , "❤️" , "️😍","😉" , "😁", "😎" , "✌️" , "🤦‍♀️", "️😋"};
+        String[] emojis = {"😊","❤️","️😍","😉","😁","😎","✌️","🤦‍♀️","️😋"};
 
         Stage emojiStage = new Stage();
         VBox emojiVBox = new VBox();
@@ -140,7 +143,9 @@ public class ServerController {
         emojiStage.setTitle("Choose Emoji");
         emojiStage.setScene(scene);
         emojiStage.show();
+
     }
+
 
     @FXML
     void typeMsg(ActionEvent event) {

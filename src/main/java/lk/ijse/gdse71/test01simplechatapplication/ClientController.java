@@ -1,5 +1,6 @@
 package lk.ijse.gdse71.test01simplechatapplication;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -68,6 +70,8 @@ public class ClientController {
                         imageView.setImage(image);
                     }
                     txtArea.appendText("Server : " + message + "\n");
+
+
                 }
             }catch (Exception e){
 
@@ -112,7 +116,7 @@ public class ClientController {
 
     @FXML
     void sendEmojiBtnOnActions(ActionEvent event) {
-        String[] emojis = {"😊" , "❤️" , "️😍","😉" , "😁", "😎" , "✌️" , "🤦‍♀️", "️😋"};
+        String[] emojis = {"😊","❤️","️😍","😉","😁","😎","✌️","🤦‍♀️","️😋"};
 
         Stage emojiStage = new Stage();
         VBox emojiVBox = new VBox();
@@ -133,6 +137,7 @@ public class ClientController {
         emojiStage.setTitle("Choose Emoji");
         emojiStage.setScene(scene);
         emojiStage.show();
+
     }
 
 
