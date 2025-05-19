@@ -2,12 +2,14 @@ package lk.ijse.gdse71.test01simplechatapplication;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -19,6 +21,10 @@ public class ClientController {
 
     @FXML
     private Button btnSend;
+
+    @FXML
+    private Button btnEmoji;
+
 
     @FXML
     private Button chooseFile;
@@ -45,6 +51,10 @@ public class ClientController {
             try{
                 socket = new Socket("localhost", 4000);
                 dataInputStream = new DataInputStream(socket.getInputStream());
+
+                txtArea.setStyle("-fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 14;");
+                txtField.setStyle("-fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 14;");
+
                 while(true){
                     message = dataInputStream.readUTF();
 
@@ -98,6 +108,31 @@ public class ClientController {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    @FXML
+    void sendEmojiBtnOnActions(ActionEvent event) {
+        String[] emojis = {"😊" , "❤️" , "️😍","😉" , "😁", "😎" , "✌️" , "🤦‍♀️", "️😋"};
+
+        Stage emojiStage = new Stage();
+        VBox emojiVBox = new VBox();
+        emojiVBox.setSpacing(5);
+        emojiVBox.setStyle("-fx-padding: 10; -fx-background-color: white; -fx-min-width: 10px; -fx-max-width: 100px");
+
+        for (String emoji : emojis) {
+            Button emojiButton = new Button(emoji);
+            emojiButton.setStyle("-fx-font-size: 20;");
+            emojiButton.setOnAction(e -> {
+                txtField.appendText(emoji);
+                emojiStage.close();
+            });
+            emojiVBox.getChildren().add(emojiButton);
+
+        }
+        Scene scene = new Scene(emojiVBox);
+        emojiStage.setTitle("Choose Emoji");
+        emojiStage.setScene(scene);
+        emojiStage.show();
     }
 
 
